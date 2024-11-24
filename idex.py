@@ -89,6 +89,4 @@ def main():
         elif option == 5:
             print(f"Количество выполненных операций с записями: {operation_count}")
             break
-
-if __name__ == "__main__":
-    main()
+main()
