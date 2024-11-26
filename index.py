@@ -26,22 +26,22 @@ def correct_input(prompt):
 def first(data):
     print("Все записи:")
     for entry in data:
-        print(f"Код: {entry['id']}, "
-                f"Имя рыбы: {entry['name']}, "                       
-                f"Латинское имя рыбы: {entry['latin_name']}, "
-                f"Является ли соленоводной: {entry['is_salt_water_fish']}, "    
-                f"Количество подвидов: {entry['sub_type_count']}")
+        print(f"Код: {entry['id']}")
+        print(f"Имя рыбы: {entry['name']}")
+        print(f"Латинское имя рыбы: {entry['latin_name']}")
+        print(f"Является ли соленоводной: {entry['is_salt_water_fish']}")
+        print(f"Количество подвидов: {entry['sub_type_count']}")
 
 def second(data):
     search_id = int(input("Введите ID записи для поиска: "))
     found = False
     for entry in data:
         if entry["id"] == search_id:
-            print(f"Код: {entry['id']}, "
-                f"Имя рыбы: {entry['name']}, "                       
-                f"Латинское имя рыбы: {entry['latin_name']}, "
-                f"Является ли соленоводной: {entry['is_salt_water_fish']}, "    
-                f"Количество подвидов: {entry['sub_type_count']}")
+            print(f"Код: {entry['id']}")
+            print(f"Имя рыбы: {entry['name']}")
+            print(f"Латинское имя рыбы: {entry['latin_name']}")
+            print(f"Является ли соленоводной: {entry['is_salt_water_fish']}")
+            print(f"Количество подвидов: {entry['sub_type_count']}")
             found = True
             break
     if not found:
