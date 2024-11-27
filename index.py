@@ -33,43 +33,64 @@ def first(data):
         print(f"Количество подвидов: {entry['sub_type_count']}")
 
 def second(data):
-    search_id = int(input("Введите ID записи для поиска: "))
-    found = False
-    for entry in data:
-        if entry["id"] == search_id:
-            print(f"Код: {entry['id']}")
-            print(f"Имя рыбы: {entry['name']}")
-            print(f"Латинское имя рыбы: {entry['latin_name']}")
-            print(f"Является ли соленоводной: {entry['is_salt_water_fish']}")
-            print(f"Количество подвидов: {entry['sub_type_count']}")
-            found = True
-            break
-    if not found:
-        print("Запись не найдена.")
+    while True:
+        search_id = int(input("Введите ID записи для поиска: ")) # запрашиваем ID для поиска
+        found = False # флаг для отслеживания, была ли найдена запись
+        for entry in data: # перебираем все записи
+            if entry["id"] == search_id: # если запись по id равна введенному id
+                print(f"Код: {entry['id']}")
+                print(f"Имя рыбы: {entry['name']}")
+                print(f"Латинское имя рыбы: {entry['latin_name']}")
+                print(f"Является ли соленоводной: {entry['is_salt_water_fish']}")
+                print(f"Количество подвидов: {entry['sub_type_count']}")
+                found = True # запись найдена
+                break # прерываем цикл
+        if found:
+            break # выходим из цикла, если запись найдена
+        print("Запись не найдена. Попробуйте еще раз.") # выводим, если запись не найдена
 
 def third(data):
-    new_record = {
-        "id": int(input("Введите ID: ")),
-        "name": input("Введите общее название рыбы: "),
-        "latin_name": input("Введите латинское название рыбы: "),
-        "is_salt_water_fish": input("Является ли рыба соленоводной? "),
-        "sub_type_count": int(input("Введите количество подвидов: "))
+    while True:
+        id_add = int(input("Введите ID: ")) # вводим ID
+        exist = False
+        for entry in data: # проверяем, существует ли ID
+            if entry["id"] == id_add:
+                exist = True
+                print("Такое id уже существует. Попробуйте что-то другое.")
+                break
+        if not exist:
+            break
+    name_add = input("Введите общее название рыбы: ") # вводим название
+    latin_name = input("Введите латинское название рыбы: ") # вводим латинское название
+    is_salt_water_fish = input("Является ли рыба соленоводной? ") # вводим тип рыбы
+    sub_type_count = int(input("Введите количество подвидов: ")) # вводим количество подвидов
+
+    new_record = { # создаём словарь для новой записи
+        "id": id_add,
+        "name": name_add,
+        "latin_name": latin_name,
+        "is_salt_water_fish": is_salt_water_fish,
+        "sub_type_count": sub_type_count
     }
-    data.append(new_record)
-    with open("dump.json", 'w', encoding='utf-8') as file:
-        json.dump(data, file, indent=4, ensure_ascii=False)
+    data.append(new_record) # добавляем новую запись в список
+
+    with open("dump.json", 'w', encoding='utf-8') as file: # открываем файл для записи
+        json.dump(data, file) # записываем данные
     return 1
 
 def fourth(data):
-    delete_id = int(input("Введите ID для удаления: "))
-    found = False
-    for index, entry in enumerate(data):
-        if entry["id"] == delete_id:
-            del data[index]
-            found = True
-            break
-    if not found:
-        print("Запись не найдена.")
+    while True:
+        delete_id = int(input("Введите ID для удаления: ")) # запрашиваем ID для удаления
+
+        for index, entry in enumerate(data): # используем enumerate для получения индекса
+            if entry["id"] == delete_id: # если запись найдена
+                del data[index] # удаляем запись
+                print("Запись удалена.")
+                break
+        else:
+            print("Запись не найдена. Попробуйте еще раз.")
+            continue # запрашиваем ID снова
+        break # выходим из цикла, если запись удалена
 
 def main():
     data = file()
