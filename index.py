@@ -34,7 +34,13 @@ def first(data):
 
 def second(data):
     while True:
-        search_id = int(input("Введите ID записи для поиска: ")) # запрашиваем ID для поиска
+        str_search = input("Введите ID записи для поиска: ") # запрашиваем ID для поиска
+        search_id = -1
+        try:
+            search_id = int(str_search)
+        except ValueError:
+            print("Введите число!")
+            continue
         found = False # флаг для отслеживания, была ли найдена запись
         for entry in data: # перебираем все записи
             if entry["id"] == search_id: # если запись по id равна введенному id
@@ -51,12 +57,18 @@ def second(data):
 
 def third(data):
     while True:
-        id_add = int(input("Введите ID: ")) # вводим ID
+        str_add = input("Введите ID: ") # вводим ID
+        add_id = -1
+        try:
+            add_id = int(str_add)
+        except ValueError:
+            print("Введите число!")
+            continue
         exist = False
         for entry in data: # проверяем, существует ли ID
-            if entry["id"] == id_add:
-                exist = True
+            if entry["id"] == add_id:
                 print("Такое id уже существует. Попробуйте что-то другое.")
+                exist = True
                 break
         if not exist:
             break
@@ -66,7 +78,7 @@ def third(data):
     sub_type_count = int(input("Введите количество подвидов: ")) # вводим количество подвидов
 
     new_record = { # создаём словарь для новой записи
-        "id": id_add,
+        "id": add_id,
         "name": name_add,
         "latin_name": latin_name,
         "is_salt_water_fish": is_salt_water_fish,
@@ -80,8 +92,13 @@ def third(data):
 
 def fourth(data):
     while True:
-        delete_id = int(input("Введите ID для удаления: ")) # запрашиваем ID для удаления
-
+        str_delete = input("Введите ID для удаления: ") # запрашиваем ID для удаления
+        delete_id = -1
+        try:
+            delete_id = int(str_delete)
+        except ValueError:
+            print("Введите число!")
+            continue
         for index, entry in enumerate(data): # используем enumerate для получения индекса
             if entry["id"] == delete_id: # если запись найдена
                 del data[index] # удаляем запись
